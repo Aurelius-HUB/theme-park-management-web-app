@@ -162,3 +162,5 @@ bld/
 
 # Visual Studio cache
 .vs/
+
+.readme
