@@ -33,7 +33,7 @@ To run this application locally, you will need **Node.js** and **MySQL** install
 ### 1. Database Initialization
 1. Open MySQL Workbench (or your preferred MySQL client) and connect to your local MySQL server.
 2. Create a new schema named `park_database`.
-3. Locate the SQL dump file provided in the repository (e.g., `sql/park_database.sql` or `submission_dump.sql`).
+3. Locate the SQL dump file provided in the repository (`dump.sql`).
 4. Execute the SQL script to build the schema, insert stored procedures, and populate the database with sample data.
 
 ### 2. Environment Configuration
