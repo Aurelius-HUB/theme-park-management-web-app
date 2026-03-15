@@ -1,68 +1,73 @@
 # Theme Park Management System
 
-A web application designed to manage theme park operations. The app follows an MVC architecture using Node.js, Express, and MySQL.
+A full-stack web application designed to manage theme park operations, demonstrating database architecture, role-based access control, and dynamic data rendering. The application follows an MVC architecture.
+
+## Technology Stack
+- **Backend:** Node.js, Express.js
+- **Frontend:** EJS (Embedded JavaScript templating), HTML, CSS
+- **Database:** MySQL
+- **Architecture:** Model-View-Controller (MVC)
+
+## Core Features
+- **Role-Based Access Control (RBAC):** Distinct dashboards and permissions for Admins, Park Managers, Location Managers, and Maintenance Staff.
+- **Ride & Maintenance Management:** Track ride statuses, log operational runs, and submit/resolve maintenance tickets.
+- **Inventory & Vendor Operations:** Manage park inventory, process restocks, and handle vendor checkouts.
+- **Ticketing & Memberships:** Process customer ticket purchases and manage recurring member profiles.
+- **Reporting Analytics:** Generate attendance, ride popularity, and closure impact reports.
 
 ## Project Structure
 
-The submission includes the following files and directories:
-
 - **`app.js`**: Initializes the Express server, configures session management, and sets up middleware.
 - **`db.js`**: Handles the database connection pool.
-- **`.env`**: Contains environment variables and database credentials.
-- **`routes/`**: Contains backend logic and API endpoints. Examples:
-  - `routes/auth.js`: Handles login/logout logic.
-  - `routes/rides.js`: Manages ride operations.
+- **`routes/`**: Contains backend logic and API endpoints (e.g., `auth.js`, `rides.js`, `inventory.js`).
 - **`views/`**: Contains the frontend templates rendered by EJS.
-- **`middleware/`**: Custom middleware functions to enforce role-based access control.
-- **`public/`**: Stores images for the front page.
-- **`submission_dump.sql`**: Complete SQL export of the database (Schema, stored procedures, triggers, and sample data).
-- **`ca.pem`**: Certificate required for SSL connection to the database.
+- **`middleware/`**: Custom middleware functions to enforce authentication and access control.
+- **`sql/`**: Contains database initialization scripts, including schema definitions, stored procedures, triggers, and dummy data generation.
 
 ---
 
-## Installation & Setup
+## Local Installation & Setup
 
-### 1. Connect to Database
-To view park data and verify changes, connect via **MySQL Workbench**:
+To run this application locally, you will need **Node.js** and **MySQL** installed on your machine.
 
-1. Create a new connection.
-2. Enter the following **Connection Details**:
+### 1. Database Initialization
+1. Open MySQL Workbench (or your preferred MySQL client) and connect to your local MySQL server.
+2. Create a new schema named `park_database`.
+3. Locate the SQL dump file provided in the repository (e.g., `sql/park_database.sql` or `submission_dump.sql`).
+4. Execute the SQL script to build the schema, insert stored procedures, and populate the database with sample data.
 
-| Setting | Value |
-| :--- | :--- |
-| **Hostname** | `mysql-254204d6-curaturae-12be.f.aivencloud.com` |
-| **Port** | `22523` |
-| **Username** | `avnadmin` |
-| **Password** | `AVNS_G8_3Eyw9XAf1ZYbd8BQ` |
+### 2. Environment Configuration
+Create a `.env` file in the root directory of the project to store your local database credentials and session secrets. 
 
-3. Navigate to the **SSL** tab.
-4. In the **"SSL CA File"** field, browse and select the included `ca.pem` file.
-5. Click **"Test Connection"**.
-6. Import data using "submission_dump.sql"
-	- On success, changes to the frontend can be verified here.
+Add the following variables, updating the values to match your local MySQL setup:
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_local_mysql_password
+DB_NAME=park_database
+DB_PORT=3306
+SESSION_SECRET=your_secret_key
 
 
-### 2. Run the Web App
+### 3. Run the Web Application
+1. Open a terminal in the root directory of the cloned repository.
+2. Install the required Node.js dependencies:
+   npm install
 
-#### Option A: Hosted Version (No Setup)
-Access the live application here: **[https://theme-park-app.onrender.com/](https://theme-park-app.onrender.com/)**
-> *Note: Data changes made on the frontend can be verified in the database using the connection established in Step 1.*
+3. Start the Express server:
+   node app.js
 
-#### Option B: Local Setup
-1. Unzip the codebase if not already done so.
-2. Open a terminal in the root directory.
-   - Install dependencies: `npm install`
-   - Start the server: `node app.js`
-3. **Open your browser to http://localhost:3000**
-   > **Note:** The `.env` file is already configured to connect with the database.
+4. Open your web browser and navigate to: **http://localhost:3000**
 
 ---
 
-## Logins & Roles
+## Application Testing: Logins & Roles
+
+The database is populated with sample employee accounts to test the Role-Based Access Control (RBAC) features.
 
 **Default Password for ALL accounts:** `Clubhouse123`
 
-### Key Role Accounts
+### Key Management Roles
 
 | Role | Email |
 | :--- | :--- |
@@ -71,7 +76,7 @@ Access the live application here: **[https://theme-park-app.onrender.com/](https
 | **Location Manager** (Main Entrance) | `mickey@park.com` |
 | **Staff** (Main Entrance) | `daisy@park.com` |
 
-### Maintenance Staff
+### Maintenance Staff Roles
 
 | Role | Email |
 | :--- | :--- |
@@ -81,6 +86,4 @@ Access the live application here: **[https://theme-park-app.onrender.com/](https
 | Maintenance 4 | `manny@park.com` |
 | Maintenance 5 | `doc@park.com` |
 
-> **Note:** You may also log in as any other employee found in the "Park Employees" list using their email and the default password "Clubhouse123".
-"# theme-park-management-web-app" 
-"# theme-park-management-web-app" 
+> **Note:** You may also log in as any other employee found in the "Park Employees" list within the database using their email and the default password.
